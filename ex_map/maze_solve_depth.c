@@ -164,9 +164,26 @@ bool	search(int s_i, int s_j)
 		// Right
 		if (check(i + 1, j))
 		{
-			
+			pos.i = i + 1;
+			pos.j = j;
+
+			push(&stack, &pos);
 		}
-
-
 	}
+	return ret;
+}
+
+int main (void)
+{
+	initStack(&stack);
+
+	// // Set Goal
+	// maze[5][3] = GOAL;
+
+	// Set Start
+	if (search(1, 3))
+		printf("Clear! You found GOAL!\n");
+	else
+		printf("Goal not found.\n");
+	return (0);
 }
