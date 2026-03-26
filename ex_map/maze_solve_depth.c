@@ -173,6 +173,7 @@ bool	search(int s_i, int s_j)
 	return ret;
 }
 
+
 int main (void)
 {
 	initStack(&stack);
