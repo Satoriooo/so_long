@@ -116,16 +116,21 @@ int main()
 		printf("The shape is valid\n");
 	else
 		printf("The shape is NOT valid\n");
-
+	
 	if (is_element_valid(map, cnt) == 1)
+		printf("The elemets are valid\n");
+	else
+		printf("The elements are NOT valid\n");
+	
+	if (is_path_valid(map, cnt) == 1)
+		// TODO:
 		// It checks...
 			// - if theres only (0, 1, P, E, C)
 			// - if there's only one (P, E) on the entire map
 			// - if there are all of C in floodfill area
 			// - '0' can remain left out side of floodfill area
-
-		printf("The shape is valid\n");
+		printf("The path is valid\n");
 	else
-		printf("The shape is NOT valid\n");
+		printf("The path is NOT valid\n");
 
 }
