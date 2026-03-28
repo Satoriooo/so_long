@@ -1,8 +1,16 @@
-#include <fcntl.h>
-#include <stdio.h>
-#include "ex_map.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_num_nl.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/28 19:01:26 by shirose           #+#    #+#             */
+/*   Updated: 2026/03/28 19:01:32 by shirose          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define BUFFER_SIZE 42
+#include "so_long.h"
 
 int	count_nl(int fd)
 {

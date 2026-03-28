@@ -1,13 +1,16 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_element.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/28 18:59:48 by shirose           #+#    #+#             */
+/*   Updated: 2026/03/28 18:59:58 by shirose          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef struct s_element
-{
-	int p;
-	int c;
-	int e;
-	int w;
-	int z;
-}	t_elm;
+#include "so_long.h"
 
 int ft_is_in(char *s, char c)
 {
