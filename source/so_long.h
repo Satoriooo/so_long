@@ -30,5 +30,24 @@ typedef struct s_game
 	int		items_collected;
 }	t_game;
 
+typedef struct s_elm
+{
+	int	c;
+	int	e;
+	int	p;
+	int	w;
+	int	z;
+}	t_elm;
+
+typedef struct s_point {
+	int	x;
+	int y;
+}	t_point;
+
+typedef struct s_counter
+{
+	int c;
+	int e;
+}	t_counter;
 
 #endif

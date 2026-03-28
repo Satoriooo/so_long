@@ -6,39 +6,25 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:07 by shirose           #+#    #+#             */
-/*   Updated: 2026/03/28 19:01:12 by shirose          ###   ########.fr       */
+/*   Updated: 2026/03/28 21:33:05 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-typedef struct s_point {
-	int	x;
-	int y;
-}	t_point;
-
-typedef struct s_counter
-{
-	int c;
-	int e;
-}	t_counter;
-
 void flood_fill(char **tab, t_point size, t_point begin, t_counter *counter)
 {
 	t_point p;
 	static int cnt = 0;
-	cnt++;
-	printf("flood_fill call: %d\n", cnt);
-	p = begin;
 
+	cnt++;
+	p = begin;
 	// check if the current position is valid
 	if (p.x < 0 || p.x > size.x - 1 || p.y < 0 || p.y > size.y - 1)
 		return ;
 	// If its wall or 'F', do nothing and return
 	if (tab[p.y][p.x] == 'F' || tab[p.y][p.x] == '1')
 		return ;
-	// If it's 'C', count++
-	// if it's 'E', flag++
 	if (tab[p.y][p.x] == 'C')
 	{
 		counter->c++;
@@ -50,7 +36,7 @@ void flood_fill(char **tab, t_point size, t_point begin, t_counter *counter)
 	tab[p.y][p.x] = 'F';
 	if (cnt > 100)
 		return ;
-		
+
 	p.x--;
 	flood_fill(tab, size, p, counter); // Left !!!
 	p.x++;
