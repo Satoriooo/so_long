@@ -120,9 +120,9 @@ int	main(void)
 		"1111111"
     };
 
-	game.map = malloc(sizeof(char *) * game.map_h);
 	game.map_w = 7;
 	game.map_h = 6;
+	game.map = malloc(sizeof(char *) * game.map_h);
 	int i = 0;
 	while (i < game.map_h)
 	{
@@ -152,8 +152,8 @@ int	main(void)
 
 	printf("check point 02\n");
 
-	game.floor_img = mlx_xpm_file_to_image(game.mlx_ptr, "floor.xpm", &img_w, &img_h);
 	game.wall_img = mlx_xpm_file_to_image(game.mlx_ptr, "wall.xpm", &img_w, &img_h);
+	game.floor_img = mlx_xpm_file_to_image(game.mlx_ptr, "floor.xpm", &img_w, &img_h);
 	game.player_img = mlx_xpm_file_to_image(game.mlx_ptr, "player.xpm", &img_w, &img_h);
 	game.item_img = mlx_xpm_file_to_image(game.mlx_ptr, "coin.xpm", &img_w, &img_h);
 	game.exit_img = mlx_xpm_file_to_image(game.mlx_ptr, "exit.xpm", &img_w, &img_h);
