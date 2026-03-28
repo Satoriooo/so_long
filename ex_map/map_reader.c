@@ -3,9 +3,9 @@
 
 /*
 // TODO: Check if the map is valid
-	- If its rectangular
-	- If its surrounded by walls
-	- If there's a valid path
+	- If its rectangular -> OK
+	- If its surrounded by walls -> OK
+	- If there's a valid path -> On going...
 	(- You need to able to parse any kind of map, as long as it respects the rules above)
 	- If the map contains player, exit, and all the collectibles (at least one) (check starts from the starting position)
 	- Show the number of current movements

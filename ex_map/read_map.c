@@ -1,32 +1,6 @@
 #include "get_next_line.h"
 #include "ex_map.h"
 
-char	*ft_strdup2(char *s)
-{
-	char	*dest;
-	size_t	len;
-	size_t	i;
-
-	printf("strd check00 s: %s\n", s);
-
-	len = 0;
-	while (s[len])
-		len++;
-	printf("strd check01 len: %d\n", (int)len);
-	dest = (char *)malloc(sizeof(char) * (len + 1));
-	if (dest == NULL)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		dest[i] = s[i];
-		i++;
-	}
-	dest[i] = '\0';
-	printf("strd check02 dest: %s\n", dest);
-	return (dest);
-}
-
 int count_line(int fd)
 {
 	char *line;
@@ -55,7 +29,7 @@ char **read_map(int fd, char *filename)
 	{
 		line = get_next_line(fd);
 		printf("read_map check 00 line: %s\n", line);
-		map[i] = ft_strdup2(line);
+		map[i] = ft_strdup(line);
 		free((char *)line);
 		i++;
 	}

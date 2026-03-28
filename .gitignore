@@ -1,5 +1,6 @@
 subject
 *.o
+*.a
 so_long
 minilibx-linux
 minilibx_macos_metal
