@@ -50,4 +50,9 @@ typedef struct s_counter
 	int e;
 }	t_counter;
 
+void flood_fill(t_game *game, t_point size, t_point begin, t_counter *counter);
+int read_and_check_map(char *filename, t_game *game);
+int is_valid_map(t_game *game);
+int	is_valid_path(t_game *game);
+
 #endif

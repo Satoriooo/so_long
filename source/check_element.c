@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:59:48 by shirose           #+#    #+#             */
-/*   Updated: 2026/03/28 18:59:58 by shirose          ###   ########.fr       */
+/*   Updated: 2026/03/29 15:32:50 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,20 @@ int ft_is_in(char *s, char c)
 	while(s[i])
 	{
 		if (s[i] == c)
-			return (1);
+			return (0);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
-int	is_elm_correct(t_elm *elm)
+int	is_correct_element(t_elm *elm)
 {
-	if (elm->p == 1 &&
-		elm->e == 1 &&
-		elm->c > 0)
-		return (1);
-	return (0);
+	if (elm->p == 1 && elm->e == 1 && elm->c > 0)
+		return (0);
+	return (-1);
 }
 
-int is_element_valid(char **map)
+int is_valid_element(char **map)
 {
 	int 	i;
 	int 	j;
@@ -53,7 +51,7 @@ int is_element_valid(char **map)
 		while(map[i][j])
 		{
 			if (ft_is_in("PCE10", map[i][j]) == 0)
-				return (0);
+				return (-1);
 			else if (map[i][j] == 'P')
 				elm.p++;
 			else if(map[i][j] == 'C')
@@ -64,8 +62,8 @@ int is_element_valid(char **map)
 		}
 		i++;
 	}
-	if (is_elm_correct(&elm) == 1)
-		return (1);
-	else
+	if (is_correct_element(&elm) == 1)
 		return (0);
+	else
+		return (-1);
 }
