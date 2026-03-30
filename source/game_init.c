@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/03/29 15:59:17 by shirose          ###   ########.fr       */
+/*   Updated: 2026/03/30 17:21:47 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,23 @@ void	draw_map(t_game *game)
 	}
 }
 
+void	img_init(t_game *game)
+{
+	game->wall_img = NULL;
+	game->floor_img = NULL;
+	game->player_img = NULL;
+	game->item_img = NULL;
+	game->exit_img = NULL;
+}
+
 int	load_images(t_game *game)
 {
-	game->wall_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/wall.xpm", &img_w, &img_h);
-	game->floor_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/floor.xpm", &img_w, &img_h);
-	game->player_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/player.xpm", &img_w, &img_h);
-	game->item_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/coin.xpm", &img_w, &img_h);
-	game->exit_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/exit.xpm", &img_w, &img_h);
+	img_init(game);
+	game->wall_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/wall.xpm", game->img_w, game->img_h);
+	game->floor_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/floor.xpm", game->img_w, game->img_h);
+	game->player_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/player.xpm", game->img_w, game->img_h);
+	game->item_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/coin.xpm", game->img_w, game->img_h);
+	game->exit_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/exit.xpm", game->img_w, game->img_h);
 	if (!(game->wall_img) || !(game->floor_img) || !(game->player_img) ||
 		!(game->item_img) || !(game->exit_img))
 		return (-1);
@@ -85,22 +95,22 @@ int handle_keypress(int keysym, t_game *game)
 {
 	if (keysym == 0xff1b) // ESC
 		exit (0);
-	if (keysym == 0xff51) // Left
+	if (keysym == 0xff51 || keysym == 0x0041) // Left
 	{
 		if (game->map[game->player_y][game->player_x - 1] != '1')
 			game->player_x -= 1;
 	}
-	else if (keysym == 0xff52) // Up
+	else if (keysym == 0xff52 || keysym == 0x0057) // Up
 	{
 		if (game->map[game->player_y - 1][game->player_x] != '1')
 			game->player_y -= 1;
 	}
-	if (keysym == 0xff53) // Right
+	if (keysym == 0xff53 || keysym == 0x0044) // Right
 	{
 		if (game->map[game->player_y][game->player_x + 1] != '1')
 			game->player_x += 1;
 	}
-	if (keysym == 0xff54) // Down
+	if (keysym == 0xff54 || keysym == 0x0053) // Down
 	{
 		if (game->map[game->player_y + 1][game->player_x] != '1')
 			game->player_y += 1;
@@ -137,15 +147,9 @@ int main(int ac, char **av)
 	if (check_ac(ac) == -1)
 		return(1);
 
-	// read_map 
-		// - check if it's valid filename
-		// - read map
-		// - check if it's valid map	
 	if(read_and_check_map(av[1], &game) == -1)
 		return(1);
 
-	// mlx_init()
-	// mlx_new_window()
 	if (init_mlx_win(&game) == -1)
 		return(1);
 	printf("check point 01\n");
@@ -162,7 +166,7 @@ int main(int ac, char **av)
 
 	printf("check point 02\n");
 
-	if (load_game_images(&game) == -1)
+	if (load_images(&game) == -1)
 		return (1);
 	printf("check point 03\n");
 	draw_map(&game);

@@ -16,11 +16,14 @@ typedef struct s_game
 	char	**map;
 	int		map_w;
 	int		map_h;
+	int		img_w;
+	int		img_h;
 	void	*wall_img;
 	void	*floor_img;
 	void	*player_img;
 	void	*item_img;
 	void	*exit_img;
+	int		player_on_map;
 	int		player_x;
 	int		player_y;
 	int		exit_on_map;
@@ -44,15 +47,11 @@ typedef struct s_point {
 	int y;
 }	t_point;
 
-typedef struct s_counter
-{
-	int c;
-	int e;
-}	t_counter;
-
-void flood_fill(t_game *game, t_point size, t_point begin, t_counter *counter);
-int read_and_check_map(char *filename, t_game *game);
-int is_valid_map(t_game *game);
-int	is_valid_path(t_game *game);
+int		read_and_check_map(char *filename, t_game *game);
+void	flood_fill(t_game *game, t_point size, t_point start);
+int		read_map(char *filename, t_game *game);
+int		is_valid_map(t_game *game);
+int		is_valid_path(t_game *game);
+int		is_valid_element(t_game *game);
 
 #endif

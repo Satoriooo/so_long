@@ -12,7 +12,7 @@ typedef struct s_counter
 	int e;
 }	t_counter;
 
-void flood_fill(char **tab, t_point size, t_point begin, t_counter *counter)
+void flood_fill(t_game *game, t_point size, t_point begin)
 {
 	t_point p;
 	static int cnt = 0;
@@ -30,7 +30,7 @@ void flood_fill(char **tab, t_point size, t_point begin, t_counter *counter)
 	// if it's 'E', flag++
 	if (tab[p.y][p.x] == 'C')
 	{
-		counter->c++;
+		game->items_on_path++;
 		printf("counter c: %d --- e: %d\n", counter->c, counter->e);
 	}
 	if (tab[p.y][p.x] == 'E')

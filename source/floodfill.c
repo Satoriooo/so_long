@@ -6,20 +6,20 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:07 by shirose           #+#    #+#             */
-/*   Updated: 2026/03/29 17:12:08 by shirose          ###   ########.fr       */
+/*   Updated: 2026/03/30 17:04:55 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 // fllodfill ... check map -> count and save in counter
-void	flood_fill(t_game *game, t_point size, t_point begin)
+void	flood_fill(t_game *game, t_point size, t_point coord)
 {
 	t_point		p;
 	static int	cnt = 0;
 
 	cnt++;
-	p = begin;
+	p = coord;
 	// check if the current position is valid
 	if (p.x < 0 || p.x > size.x - 1 || p.y < 0 || p.y > size.y - 1)
 		return ;
@@ -28,8 +28,8 @@ void	flood_fill(t_game *game, t_point size, t_point begin)
 		return ;
 	if (game->map[p.y][p.x] == 'C')
 	{
-		game->items_collected++;
-		printf("counter c: %d --- e: %d\n", game->items_collected, game->exit_on_path);
+		game->items_on_path++;
+		printf("counter c: %d --- e: %d\n", game->items_on_path, game->exit_on_path);
 	}
 	if (game->map[p.y][p.x] == 'E')
 		game->exit_on_path++;
@@ -97,7 +97,7 @@ void	print_tab(t_game *game)
 
 //     char **area;
 //     t_point size = {8, 7};
-//     t_point begin = {1, 1};
+//     t_point coord = {1, 1};
 //     char *zone[] = {
 //         "11111111",
 // 		"10000001",
@@ -115,8 +115,8 @@ void	print_tab(t_game *game)
 // 	printf("check main:01\n");
 // 	print_tab(area);
 // 	printf("check main:02 --- floodfill\n");
-// 	printf("Start point: area[%d, %d]: %c\n", begin.x, begin.y, area[begin.x][begin.y]);
-//     flood_fill(area, size, begin, &counter);
+// 	printf("Start point: area[%d, %d]: %c\n", coord.x, coord.y, area[coord.x][coord.y]);
+//     flood_fill(area, size, coord, &counter);
 //     printf("\n");
 // 	printf("check main:03\n");
 //     print_tab(area);
