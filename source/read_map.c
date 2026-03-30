@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:43 by shirose           #+#    #+#             */
-/*   Updated: 2026/03/29 14:49:05 by shirose          ###   ########.fr       */
+/*   Updated: 2026/03/30 18:41:16 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	is_valid_map_name(char *s)
 	if (is_alpha_num_underbar(s) == -1)
 		return (-1);
 	if (is_correct_suffix(s) == -1)
-		reuturn (-1);
+		return (-1);
 	return (0);
 }
 
@@ -82,7 +82,7 @@ int	read_map(char *filename, t_game *game)
 	
 	n = is_valid_map_name(filename);
 	if (n == -1)
-		reuturn (-1);
+		return (-1);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (-1);

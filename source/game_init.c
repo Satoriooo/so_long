@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/03/30 17:21:47 by shirose          ###   ########.fr       */
+/*   Updated: 2026/03/30 18:38:29 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,12 +136,12 @@ int	init_mlx_win(t_game *game)
 {
 	game->mlx_ptr = mlx_init();
 	game->win_ptr = mlx_new_window(game->mlx_ptr, game->map_w * 32, game->map_h * 32, "map");
+	return (0);
 }
 
 int main(int ac, char **av)
 {
 	t_game	game;
-	char	**map;
 	int i;
 
 	if (check_ac(ac) == -1)

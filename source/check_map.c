@@ -6,21 +6,11 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:00:08 by shirose           #+#    #+#             */
-/*   Updated: 2026/03/30 17:04:05 by shirose          ###   ########.fr       */
+/*   Updated: 2026/03/30 18:33:34 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int ft_strlen(char *s)
-{
-	int n;
-	
-	n = 0;
-	while (s[n])
-		n++;
-	return (n);
-}
 
 int	check_left(char **map, int cnt)
 {
@@ -42,7 +32,7 @@ int	check_left(char **map, int cnt)
 	return (0);
 }
 
-int	check_top(char **map, int cnt)
+int	check_top(char **map)
 {
 	int i;
 
@@ -101,7 +91,7 @@ int is_valid_shape(char **map, int cnt)
 
 	n = 0;
 	n += check_left(map, cnt);
-	n += check_top(map,cnt);
+	n += check_top(map);
 	n += check_right(map,cnt);
 	n += check_bottom(map, cnt);
 
@@ -123,7 +113,7 @@ static void counters_init(t_game *game)
 int is_valid_map(t_game *game)
 {
 	
-	conters_init(game);
+	counters_init(game);
 	if (is_valid_shape(game->map, game->map_h) == -1)
 	{
 		printf("The shape is NOT valid\n");
@@ -134,8 +124,11 @@ int is_valid_map(t_game *game)
 		printf("The elements are NOT valid\n");
 		return (-1);
 	}
-	if (is_valid_path(game) == -1)			
-		printf("The path is valid\n");
-	else
+	if (is_valid_path(game) == -1)
+	{			
 		printf("The path is NOT valid\n");
+		return (-1);
+	}
+	return (0);
 }
+

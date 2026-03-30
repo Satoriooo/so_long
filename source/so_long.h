@@ -16,8 +16,8 @@ typedef struct s_game
 	char	**map;
 	int		map_w;
 	int		map_h;
-	int		img_w;
-	int		img_h;
+	int		*img_w;
+	int		*img_h;
 	void	*wall_img;
 	void	*floor_img;
 	void	*player_img;

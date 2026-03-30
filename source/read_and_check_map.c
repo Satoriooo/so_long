@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 21:23:16 by shirose           #+#    #+#             */
-/*   Updated: 2026/03/29 15:34:02 by shirose          ###   ########.fr       */
+/*   Updated: 2026/03/30 18:40:47 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,5 @@ int read_and_check_map(char *filename, t_game *game)
 		return (-1);
 	if (is_valid_map(game) == -1)
 		return (-1);
+	return (0);
 }
