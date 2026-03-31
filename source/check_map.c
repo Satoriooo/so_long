@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:00:08 by shirose           #+#    #+#             */
-/*   Updated: 2026/03/30 18:33:34 by shirose          ###   ########.fr       */
+/*   Updated: 2026/03/31 18:47:29 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ int	check_top(char **map)
 	int i;
 
 	i = 0;
-	while(map[0][i])
+	while(map[0][i] && map[0][i] != '\n')
 	{
 		if (map[0][i] != '1')
-			return (-1);
+			return (printf("return here 01 map[0][%d]: %c\n", i, map[0][i]), -1);
 		i++;
 	}
 	if (i < 3)
-		return (-1);
+		return (printf("return here 02\n"), -1);
 	return (0);
 }
 
-int	check_right(char **map, int cnt)
+int	check_right(char **map, int cnt) // TODO: write on README that the map does not accept a new line at the end
 {
 	int i;
 	int	pre_len;
@@ -59,10 +59,10 @@ int	check_right(char **map, int cnt)
 	while(i < cnt)
 	{
 		cur_len = ft_strlen(map[i]);
-		if (pre_len != 0 && pre_len != cur_len)
-			return (-1);
-		if (map[i][cur_len - 1] != '1')
-			return (-1);
+		if (pre_len != 0 && pre_len != cur_len && i != cnt - 1)
+			return (printf("return here 00 cur_len: %d\n", cur_len), -1);
+		if (map[i][cur_len - 2] != '1')
+			return (printf("return here 01: cur_len: %d\n", cur_len), -1);
 		pre_len = cur_len;
 		i++;
 	}
@@ -91,13 +91,17 @@ int is_valid_shape(char **map, int cnt)
 
 	n = 0;
 	n += check_left(map, cnt);
+	printf("left n: %d\n", n);
 	n += check_top(map);
+	printf("top n: %d\n", n);
 	n += check_right(map,cnt);
+	printf("right n: %d\n", n);
 	n += check_bottom(map, cnt);
+	printf("down n: %d\n", n);
 
-	if (n == 4)
+	if (n == 0)
 		return (0);
-	printf("invalid map\n");
+	printf("invalid map n: %d\n", n);
 	return (-1);
 }
 

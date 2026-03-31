@@ -20,15 +20,13 @@ GNL_HEAD = source/gnl/get_next_line.h
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -lm -lmlx -lXext -lX11 -o $(NAME)
 
 source/%.o : source/%.c $(HEAD)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 source/gnl/%.o: source/gnl/%.c $(GNL_HEAD)
 	$(CC) $(CFLAGS) -c $< -o $@
-
-source/gnl/%.o: source/gnl/%.c $(GNL_HEAD)
 
 clean:
 	$(RM) $(OBJS)

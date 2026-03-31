@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:43 by shirose           #+#    #+#             */
-/*   Updated: 2026/03/30 18:41:16 by shirose          ###   ########.fr       */
+/*   Updated: 2026/03/31 18:10:21 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_alpha_num_underbar(char *s)
 	while(s[i])
 	{
 		if(!((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a' && s[i] <= 'z') ||
-			(s[i] >= '0' && s[i]) || (s[i] == '.' || s[i] == '_')))
+			(s[i] >= '0' && s[i] <= '9') || (s[i] == '.' || s[i] == '_')))
 			return (-1);
 		i++;
 	}
@@ -47,7 +47,7 @@ int	is_correct_suffix(char *s)
 		i++;
 		j++;
 	}
-	if (s[i] == suffix[i])
+	if (s[i] == suffix[j])
 		return (0);
 	return (-1);
 }
@@ -61,11 +61,13 @@ int	is_valid_map_name(char *s)
 	return (0);
 }
 
-int count_line(int fd)
+int count_line(char *filename)
 {
 	char *line;
 	int n;
+	int	fd;
 
+	fd = open(filename, O_RDONLY);
 	n = 0;
 	while ((line = get_next_line(fd)) != NULL)
 		n++;
@@ -75,7 +77,6 @@ int count_line(int fd)
 
 int	read_map(char *filename, t_game *game)
 {
-	char	*line;
 	int		n;
 	int 	i;
 	int 	fd;
@@ -83,20 +84,19 @@ int	read_map(char *filename, t_game *game)
 	n = is_valid_map_name(filename);
 	if (n == -1)
 		return (-1);
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (-1);
-	n = count_line(fd);
-	game->map = (char **)malloc((sizeof(char *)) * n + 1);
+	n = count_line(filename);
+	game->map = (char **)malloc((sizeof(char *)) * (n + 1));
 	if (game->map == NULL)
 		return (-1);
 	i = 0;
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		return (-1);
 	while (i < n)
 	{
-		line = get_next_line(fd);
-		game->map[i] = ft_strdup(line);
-		if (line != NULL)
-			free((char *)line);
+		game->map[i] = get_next_line(fd);
+		if (game->map[i] == NULL)
+			free(game->map[i]); // TODO: MAKE CLEARNER and free all beforealocated stuff if smth failed
 		i++;
 	}
 	game->map[n] = NULL;
