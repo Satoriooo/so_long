@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/03/31 17:39:08 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/03 20:37:50 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,28 @@ void	draw_map(t_game *game)
 	}
 }
 
-void	img_init(t_game *game)
+static void	img_init(t_game *game)
 {
 	game->wall_img = NULL;
 	game->floor_img = NULL;
 	game->player_img = NULL;
 	game->item_img = NULL;
 	game->exit_img = NULL;
+	printf("img_init: done\n");
 }
 
 int	load_images(t_game *game)
 {
 	img_init(game);
-	game->wall_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/wall.xpm", game->img_w, game->img_h);
-	game->floor_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/floor.xpm", game->img_w, game->img_h);
-	game->player_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/player.xpm", game->img_w, game->img_h);
-	game->item_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/coin.xpm", game->img_w, game->img_h);
-	game->exit_img = mlx_xpm_file_to_image(game->mlx_ptr, "/image/exit.xpm", game->img_w, game->img_h);
+	game->wall_img = mlx_xpm_file_to_image(game->mlx_ptr, "./image/wall.xpm", &game->img_w, &game->img_h);
+	game->floor_img = mlx_xpm_file_to_image(game->mlx_ptr, "./image/floor.xpm", &game->img_w, &game->img_h);
+	game->player_img = mlx_xpm_file_to_image(game->mlx_ptr, "./image/player.xpm", &game->img_w, &game->img_h);
+	game->item_img = mlx_xpm_file_to_image(game->mlx_ptr, "./image/coin.xpm", &game->img_w, &game->img_h);
+	game->exit_img = mlx_xpm_file_to_image(game->mlx_ptr, "./image/exit.xpm", &game->img_w, &game->img_h);
 	if (!(game->wall_img) || !(game->floor_img) || !(game->player_img) ||
 		!(game->item_img) || !(game->exit_img))
 		return (-1);
+	printf("load images successful!\n");
 	return (0);
 }
 
@@ -148,20 +150,20 @@ int main(int ac, char **av)
 		return(1);
 
 	if(read_and_check_map(av[1], &game) == -1)
-		return(1);
+		return(printf("error, read_and_check\n"), 1);
 
 	if (init_mlx_win(&game) == -1)
 		return(1);
 	printf("check point 01\n");
 
-	i = 0;
+	i = --game.map_h;
 	if (game.win_ptr == NULL)
 	{
 		free(game.mlx_ptr);
 		while(--i >= 0)
 			free(game.map[i]);
 		free(game.map);
-		return (1);
+		return (printf("error: init_mlx_win\n"),1);
 	}
 
 	printf("check point 02\n");

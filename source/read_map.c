@@ -6,11 +6,25 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:43 by shirose           #+#    #+#             */
-/*   Updated: 2026/03/31 18:10:21 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/03 21:38:08 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	clean_map(t_game *game)
+{
+	int	n;
+	
+	n = game->map_h;
+	while (--n >= 0)
+	{
+		printf("clean_map map[%d]: %s\n", n, game->map[n]);
+		free(game->map[n]);
+	}
+	free(game->map);
+	game->map = NULL;
+}
 
 // TODO: Write the definition of correct file name in README
 int	is_alpha_num_underbar(char *s)
@@ -70,7 +84,10 @@ int count_line(char *filename)
 	fd = open(filename, O_RDONLY);
 	n = 0;
 	while ((line = get_next_line(fd)) != NULL)
+	{
 		n++;
+		free(line);
+	}
 	close(fd);
 	return (n);
 }
@@ -96,7 +113,7 @@ int	read_map(char *filename, t_game *game)
 	{
 		game->map[i] = get_next_line(fd);
 		if (game->map[i] == NULL)
-			free(game->map[i]); // TODO: MAKE CLEARNER and free all beforealocated stuff if smth failed
+			free(game->map[i]); // TODO: MAKE CLEARNER and free all before alocated stuff if smth failed
 		i++;
 	}
 	game->map[n] = NULL;

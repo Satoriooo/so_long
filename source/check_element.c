@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:59:48 by shirose           #+#    #+#             */
-/*   Updated: 2026/03/30 16:44:33 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/03 20:50:09 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ int ft_is_in(char *s, char c)
 			return (0);
 		i++;
 	}
+	printf("invalid letter: %c / ascii %d\n", c, c);
 	return (-1);
 }
 
 int	is_correct_element(t_game *game)
 {
+//	printf("exit_on_map: %d, player_on_map: %d, items_on_map: %d\n", game->exit_on_map, game->player_on_map, game->items_on_map);
 	if (game->exit_on_map == 1 && game->player_on_map == 1 && game->items_on_map > 0)
 		return (0);
 	return (-1);
@@ -45,10 +47,14 @@ int is_valid_element(t_game *game)
 		j = 0;
 		while(game->map[i][j])
 		{
-			if (ft_is_in("PCE10", game->map[i][j]) == 0)
+			if (ft_is_in("PCE10\n", game->map[i][j]) == -1)
 				return (-1);
 			else if (game->map[i][j] == 'P')
+			{
+				game->player_x = i;
+				game->player_y = j;
 				game->player_on_map++;
+			}
 			else if(game->map[i][j] == 'C')
 				game->items_on_map++;
 			else if (game->map[i][j] == 'E')
@@ -57,7 +63,7 @@ int is_valid_element(t_game *game)
 		}
 		i++;
 	}
-	if (is_correct_element(game) == 1)
+	if (is_correct_element(game) == 0)
 		return (0);
 	else
 		return (-1);

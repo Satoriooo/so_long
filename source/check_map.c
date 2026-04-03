@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:00:08 by shirose           #+#    #+#             */
-/*   Updated: 2026/03/31 18:47:29 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/03 21:11:10 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int is_valid_map(t_game *game)
 {
 	
 	counters_init(game);
+	// printf("is_valid_map ... after init game->items_on_path: %d\n", game->items_on_path);
 	if (is_valid_shape(game->map, game->map_h) == -1)
 	{
 		printf("The shape is NOT valid\n");
@@ -125,9 +126,11 @@ int is_valid_map(t_game *game)
 	}
 	if (is_valid_element(game) == -1)
 	{
+		printf("exit_on_map: %d, player_on_map: %d, items_on_map: %d\n", game->exit_on_map, game->player_on_map, game->items_on_map);
 		printf("The elements are NOT valid\n");
 		return (-1);
 	}
+	printf("is_valid_map ... player_x: %d\n", game->player_x);
 	if (is_valid_path(game) == -1)
 	{			
 		printf("The path is NOT valid\n");

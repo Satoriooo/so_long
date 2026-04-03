@@ -16,8 +16,8 @@ typedef struct s_game
 	char	**map;
 	int		map_w;
 	int		map_h;
-	int		*img_w;
-	int		*img_h;
+	int		img_w;
+	int		img_h;
 	void	*wall_img;
 	void	*floor_img;
 	void	*player_img;
@@ -53,5 +53,6 @@ int		read_map(char *filename, t_game *game);
 int		is_valid_map(t_game *game);
 int		is_valid_path(t_game *game);
 int		is_valid_element(t_game *game);
+void	clean_map(t_game *game);
 
 #endif
