@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:00:08 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/04 13:50:43 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/04 15:36:17 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ int is_valid_map(t_game *game)
 	if (is_valid_path(game) == -1)
 	{			
 		printf("The path is NOT valid\n");
+		printf("game->items_on_map: %d, game->items_on_path: %d\n", game->items_on_map, game->items_on_path);
+		printf("game->exit_on_map: %d, game->exit_on_path: %d\n", game->exit_on_map, game->exit_on_path);
 		return (-1);
 	}
 	return (0);

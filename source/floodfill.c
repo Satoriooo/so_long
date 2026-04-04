@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:07 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/03 21:17:26 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/04 16:58:43 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,25 @@ void	flood_fill(t_game *game, t_point size, t_point pos)
 
 	cnt++;
 	p = pos;
+	
+	printf("floodfill called: cnt = %d, (y, x) = (%d, %d)\n", cnt, p.y, p.x);
+
 	// check if the current position is valid
 	if (p.x < 0 || p.x > size.x - 1 || p.y < 0 || p.y > size.y - 1)
+	{
+		printf("Return point 01\n");
 		return ;
+	}
 	// If its wall or 'F', do nothing and return
 	if (game->map[p.y][p.x] == 'F' || game->map[p.y][p.x] == '1')
+	{
+		printf("Return point 02\n");
 		return ;
+	}
 	if (game->map[p.y][p.x] == 'C')
 	{
 		(game->items_on_path)++;
+		printf("found item on path! (y, x) = (%d, %d)\n", p.y, p.x);
 		printf("game->items_on_path: %d --- e: %d\n", game->items_on_path, game->exit_on_path);
 	}
 	if (game->map[p.y][p.x] == 'E')

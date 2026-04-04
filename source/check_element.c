@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:59:48 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/03 20:50:09 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/04 17:01:07 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int is_valid_element(t_game *game)
 				return (-1);
 			else if (game->map[i][j] == 'P')
 			{
-				game->player_x = i;
-				game->player_y = j;
+				game->player_x = j;
+				game->player_y = i;
 				game->player_on_map++;
 			}
 			else if(game->map[i][j] == 'C')

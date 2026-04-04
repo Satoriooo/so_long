@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/04 15:23:55 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/04 15:53:49 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	draw_map(t_game *game)
 
 	y = -1;
 	printf("--- draw map ----\n\n");
-	printf("game->map_h: %d, game->map_w: %d", game->map_h, game->map_w);
+	printf("game->map_h: %d, game->map_w: %d\n", game->map_h, game->map_w);
 	while (++y < game->map_h)
 	{
 		x = -1;

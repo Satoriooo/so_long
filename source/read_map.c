@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:43 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/04 14:02:15 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/04 15:40:22 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@ int	is_alpha_num_underbar(char *s)
 	while(s[i])
 	{
 		if(!((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a' && s[i] <= 'z') ||
-			(s[i] >= '0' && s[i] <= '9') || (s[i] == '.' || s[i] == '_')))
+			(s[i] >= '0' && s[i] <= '9') || (s[i] == '.' || s[i] == '_' || s[i] == '/')))
+		{
+			printf("error with this letter: c = %c\n", s[i]);
 			return (-1);
+		}
 		i++;
 	}
 	return (0);
@@ -120,7 +123,7 @@ int	read_map(char *filename, t_game *game)
 	game->map[n] = NULL;
 	game->map_h = n;
 	printf("game->map_h: %d\n", game->map_h);
-	game->map_w = ft_strlen(game->map[0]);
+	game->map_w = ft_strlen(game->map[0]) - 1;
 	return (0);
 }
 
