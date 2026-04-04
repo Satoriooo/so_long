@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/04 18:06:22 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/04 21:02:59 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,8 @@ int	init_mlx_win(t_game *game)
 
 void	terminate_all(t_game *game)
 {
-	clean_map(game);
+	if (game->map)
+		clean_map(game);
 	if (game->floor_img)
 		mlx_destroy_image(game->mlx_ptr, game->floor_img);
 	if (game->exit_img)
@@ -169,37 +170,62 @@ void	terminate_all(t_game *game)
 		free(game->mlx_ptr);
 	}
 	printf("terminate_all finished\n");
+	exit(1);
+}
+
+void	exit_error(char *s, t_game *game)
+{
+	if (s)
+	{
+		write(2, "Error\n", 6);
+		write(2, s, ft_strlen(s));
+		write(2, "\n", 1);
+	}
+	if (game->map)
+		clean_map(game);
+	if (game)
+		terminate_all(game);
+}
+
+void	init_struct(t_game *game)
+{
+	game->mlx_ptr = NULL;
+	game->win_ptr = NULL;
+	game->exit_img = NULL;
+	game->floor_img = NULL;
+	game->item_img = NULL;
+	game->map = NULL;
+	game->player_img = NULL;
+	game->wall_img = NULL;
+	game->exit_on_map = 0;
+	game->exit_on_path = 0;
+	game->img_h = 0;
+	game->img_w = 0;
+	game->items_collected = 0;
+	game->items_on_map = 0;
+	game->items_on_path = 0;
+	game->map_h = 0;
+	game->map_w = 0;
+	game->player_on_map = 0;
+	game->player_x = 0;
+	game->player_y = 0;
 }
 
 int main(int ac, char **av)
 {
 	t_game	game;
-	int i;
 
+	init_struct(&game);
 	if (check_ac(ac) == -1)
-		return(1);
-
-	if(read_and_check_map(av[1], &game) == -1)
-		return(printf("error, read_and_check\n"), 1);
-
-	if (init_mlx_win(&game) == -1)
-		return(1);
+	exit_error("Invalid number of parameters.", &game);
+	else if(read_and_check_map(av[1], &game) == -1)
+	exit_error(NULL, &game); // TODO:
+	else if (init_mlx_win(&game) == -1)
+	exit_error("Failed to initialize mlx or window.", &game);
 	printf("check point 01\n");
 
-	i = game.map_h;
-	if (game.win_ptr == NULL)
-	{
-		free(game.mlx_ptr);
-		while(--i >= 0)
-			free(game.map[i]);
-		free(game.map);
-		return (printf("error: init_mlx_win\n"),1);
-	}
-
-	printf("check point 02\n");
-
 	if (load_images(&game) == -1)
-		return (1);
+	exit_error("Failed to load images.", &game);
 	printf("check point 03\n");
 	draw_map(&game);
 

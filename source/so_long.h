@@ -49,12 +49,16 @@ typedef struct s_point {
 
 int		read_and_check_map(char *filename, t_game *game);
 void	flood_fill(t_game *game, t_point size, t_point start);
-int		read_map(char *filename, t_game *game);
+int		read_map(int fd, char *filename, t_game *game);
 int		is_valid_map(t_game *game);
+int		is_valid_map_name(char *filename);
 int		is_valid_path(t_game *game);
 int		is_valid_element(t_game *game);
 void	clean_map(t_game *game);
 void	terminate_all(t_game *game);
 void	print_map(t_game *game); // TODO: delete later!
+void	exit_error(char *s, t_game *game);
+void	print_error(char *s);
+void	init_struct(t_game *game);
 
 #endif

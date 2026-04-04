@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:43 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/04 15:40:22 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/04 20:34:35 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,25 @@ int	is_correct_suffix(char *s)
 	return (-1);
 }
 
+void	print_error(char *s)
+{
+	write(2, "Error:\n", 7);
+	write(2, s, ft_strlen(s));
+	write(2, "\n", 1);
+}
+
 int	is_valid_map_name(char *s)
 {
 	if (is_alpha_num_underbar(s) == -1)
+	{
+		print_error("Invalid file name. Use [a-z], [A-Z], [0-9], '_', '.'.");
 		return (-1);
+	}
 	if (is_correct_suffix(s) == -1)
+	{
+		print_error("Invalid file suffix. Use '*.ber'");
 		return (-1);
+	}
 	return (0);
 }
 
@@ -95,24 +108,21 @@ int count_line(char *filename)
 	return (n);
 }
 
-int	read_map(char *filename, t_game *game)
+int	read_map(int fd, char *filename, t_game *game)
 {
 	int		n;
 	int 	i;
-	int 	fd;
 	
-	n = is_valid_map_name(filename);
-	if (n == -1)
-		return (-1);
 	n = count_line(filename);
 	printf("Result count line: n = %d\n", n);
 	game->map = (char **)malloc((sizeof(char *)) * (n + 1));
 	if (game->map == NULL)
+	{
+		print_error("malloc for map read failed.");
 		return (-1);
+	}
 	i = 0;
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (-1);
+
 	while (i < n)
 	{
 		game->map[i] = get_next_line(fd);
