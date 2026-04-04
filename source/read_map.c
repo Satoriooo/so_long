@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:43 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/04 20:34:35 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/04 21:29:20 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ int	read_map(int fd, char *filename, t_game *game)
 	game->map_h = n;
 	printf("game->map_h: %d\n", game->map_h);
 	game->map_w = ft_strlen(game->map[0]) - 1;
+	printf("game map: %s\n", game->map[0]);
+	printf("game->map_w: %d\n", game->map_w);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/04 21:02:59 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/04 21:20:00 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,6 @@ void	init_struct(t_game *game)
 	game->exit_img = NULL;
 	game->floor_img = NULL;
 	game->item_img = NULL;
-	game->map = NULL;
 	game->player_img = NULL;
 	game->wall_img = NULL;
 	game->exit_on_map = 0;
@@ -204,6 +203,7 @@ void	init_struct(t_game *game)
 	game->items_collected = 0;
 	game->items_on_map = 0;
 	game->items_on_path = 0;
+	game->map = NULL;
 	game->map_h = 0;
 	game->map_w = 0;
 	game->player_on_map = 0;
@@ -221,17 +221,18 @@ int main(int ac, char **av)
 	else if(read_and_check_map(av[1], &game) == -1)
 	exit_error(NULL, &game); // TODO:
 	else if (init_mlx_win(&game) == -1)
-	exit_error("Failed to initialize mlx or window.", &game);
+	exit_error("Failed to initialize MLX window.", &game);
 	printf("check point 01\n");
 
 	if (load_images(&game) == -1)
 	exit_error("Failed to load images.", &game);
+	printf("Player Start: (%d, %d)\n", game.player_x, game.player_y);
 	printf("check point 03\n");
 	draw_map(&game);
 
 	printf("check point 04\n");
 	mlx_key_hook(game.win_ptr, handle_keypress, &game);
-	
+
 	printf("check point 05\n");
 	mlx_loop(game.mlx_ptr);
 	terminate_all(&game);
