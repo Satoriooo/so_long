@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:43 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/03 21:38:08 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/04 14:02:15 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int	read_map(char *filename, t_game *game)
 	if (n == -1)
 		return (-1);
 	n = count_line(filename);
+	printf("Result count line: n = %d\n", n);
 	game->map = (char **)malloc((sizeof(char *)) * (n + 1));
 	if (game->map == NULL)
 		return (-1);
@@ -118,6 +119,7 @@ int	read_map(char *filename, t_game *game)
 	}
 	game->map[n] = NULL;
 	game->map_h = n;
+	printf("game->map_h: %d\n", game->map_h);
 	game->map_w = ft_strlen(game->map[0]);
 	return (0);
 }

@@ -6,18 +6,21 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/03 20:37:50 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/04 15:23:55 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+ // TODO: mpx file must be 32 * 32
 void	draw_map(t_game *game)
 {
 	int	x;
 	int	y;
 
 	y = -1;
+	printf("--- draw map ----\n\n");
+	printf("game->map_h: %d, game->map_w: %d", game->map_h, game->map_w);
 	while (++y < game->map_h)
 	{
 		x = -1;
@@ -34,7 +37,7 @@ void	draw_map(t_game *game)
 			else if (game->map[y][x] == 'C')
 				mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
 					game->item_img, x * 32, y * 32);
-			else if (game->map[y][x] == 'P')
+			if (game->player_x == x && game->player_y == y)
 				mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
 					game->player_img, x * 32, y * 32);
 		}
@@ -74,7 +77,7 @@ void	check_item(t_game *game)
 	if (game->map[game->player_y][game->player_x] == 'C')
 	{
 		printf("CP: check_item 01: i = %d\n", i);
-		game->items_collected++;
+		(game->items_collected)++;
 		printf("CP: check_item 02: i = %d\n", i);
 		game->map[game->player_y][game->player_x] = '0';
 		printf("Items: %d\n", game->items_collected);
@@ -85,6 +88,7 @@ void	check_item(t_game *game)
 		if (game->items_collected == game->items_on_map)
 		{
 			printf("Game clear!\n");
+			terminate_all(game);
 			exit (0);
 		}
 		else
@@ -141,6 +145,29 @@ int	init_mlx_win(t_game *game)
 	return (0);
 }
 
+void	terminate_all(t_game *game)
+{
+	clean_map(game);
+	if (game->floor_img)
+		mlx_destroy_image(game->mlx_ptr, game->floor_img);
+	if (game->exit_img)
+		mlx_destroy_image(game->mlx_ptr, game->exit_img);
+	if (game->player_img)
+		mlx_destroy_image(game->mlx_ptr, game->player_img);
+	if (game->item_img)
+		mlx_destroy_image(game->mlx_ptr, game->item_img);
+	if (game->wall_img)
+		mlx_destroy_image(game->mlx_ptr, game->wall_img);
+	if (game->win_ptr)
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	if (game->mlx_ptr)
+	{
+		mlx_destroy_display(game->mlx_ptr);
+		free(game->mlx_ptr);
+	}
+	printf("terminate_all finished\n");
+}
+
 int main(int ac, char **av)
 {
 	t_game	game;
@@ -156,7 +183,7 @@ int main(int ac, char **av)
 		return(1);
 	printf("check point 01\n");
 
-	i = --game.map_h;
+	i = game.map_h;
 	if (game.win_ptr == NULL)
 	{
 		free(game.mlx_ptr);
@@ -178,5 +205,7 @@ int main(int ac, char **av)
 	
 	printf("check point 05\n");
 	mlx_loop(game.mlx_ptr);
+	terminate_all(&game);
+	exit(0);
 	return (0);
 };

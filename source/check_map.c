@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:00:08 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/03 21:11:10 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/04 13:50:43 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ static void counters_init(t_game *game)
 	game->items_on_map = 0;
 	game->exit_on_path = 0;
 	game->items_on_path = 0;
+	game->items_collected = 0;
 }
 
 int is_valid_map(t_game *game)

@@ -54,5 +54,6 @@ int		is_valid_map(t_game *game);
 int		is_valid_path(t_game *game);
 int		is_valid_element(t_game *game);
 void	clean_map(t_game *game);
+void	terminate_all(t_game *game);
 
 #endif
