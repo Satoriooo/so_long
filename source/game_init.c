@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/04 15:53:49 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/04 18:06:22 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ void	check_item(t_game *game)
 int handle_keypress(int keysym, t_game *game)
 {
 	if (keysym == 0xff1b) // ESC
+	{
+		terminate_all(game);
 		exit (0);
+	}
 	if (keysym == 0xff51 || keysym == 0x0041) // Left
 	{
 		if (game->map[game->player_y][game->player_x - 1] != '1')
