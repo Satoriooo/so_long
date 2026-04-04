@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:07 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/04 18:02:00 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/04 18:03:52 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	flood_fill(t_game *game, t_point size, t_point pos)
 		(game->exit_on_path)++;
 
 	game->map[p.y][p.x] = 'F';
-	if (cnt > 100000)
+	if (cnt > 100000) // TODO: delete it when everything works!
 		return ;
 
 	p.x--;
