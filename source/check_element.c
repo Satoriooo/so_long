@@ -6,13 +6,13 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:59:48 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/04 17:01:07 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 18:33:01 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int ft_is_in(char *s, char c)
+static int ft_is_in(char *s, char c)
 {
 	int	i;
 
@@ -27,20 +27,25 @@ int ft_is_in(char *s, char c)
 	return (-1);
 }
 
-int	is_correct_element(t_game *game)
+static int	is_correct_element(t_game *game)
 {
-//	printf("exit_on_map: %d, player_on_map: %d, items_on_map: %d\n", game->exit_on_map, game->player_on_map, game->items_on_map);
 	if (game->exit_on_map == 1 && game->player_on_map == 1 && game->items_on_map > 0)
 		return (0);
 	return (-1);
 }
 
-int is_valid_element(t_game *game)
+static void	set_player_pos(t_game *game, int x, int y)
+{	
+	game->player_x = x;
+	game->player_y = y;
+	game->player_on_map++;
+}
+
+int	is_valid_element(t_game *game)
 {
 	int 	i;
 	int 	j;
 
-	// p = 1, c > 0, e = 1, and nothing else (other than w('1') & z ('0')).
 	i = 0;
 	while (game->map[i])
 	{
@@ -50,11 +55,7 @@ int is_valid_element(t_game *game)
 			if (ft_is_in("PCE10\n", game->map[i][j]) == -1)
 				return (-1);
 			else if (game->map[i][j] == 'P')
-			{
-				game->player_x = j;
-				game->player_y = i;
-				game->player_on_map++;
-			}
+				set_player_pos(game, i, j);
 			else if(game->map[i][j] == 'C')
 				game->items_on_map++;
 			else if (game->map[i][j] == 'E')

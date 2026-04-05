@@ -6,21 +6,18 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 17:29:36 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 18:47:21 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
- // TODO: mpx file must be 32 * 32
 void	draw_map(t_game *game)
 {
 	int	x;
 	int	y;
 
 	y = -1;
-	printf("--- draw map ----\n\n");
-	printf("game->map_h: %d, game->map_w: %d\n", game->map_h, game->map_w);
 	while (++y < game->map_h)
 	{
 		x = -1;
@@ -44,19 +41,8 @@ void	draw_map(t_game *game)
 	}
 }
 
-static void	img_init(t_game *game)
-{
-	game->wall_img = NULL;
-	game->floor_img = NULL;
-	game->player_img = NULL;
-	game->item_img = NULL;
-	game->exit_img = NULL;
-	printf("img_init: done\n");
-}
-
 int	load_images(t_game *game)
 {
-	img_init(game);
 	game->wall_img = mlx_xpm_file_to_image(game->mlx_ptr, "./image/wall.xpm", &game->img_w, &game->img_h);
 	game->floor_img = mlx_xpm_file_to_image(game->mlx_ptr, "./image/floor.xpm", &game->img_w, &game->img_h);
 	game->player_img = mlx_xpm_file_to_image(game->mlx_ptr, "./image/player.xpm", &game->img_w, &game->img_h);
@@ -65,15 +51,11 @@ int	load_images(t_game *game)
 	if (!(game->wall_img) || !(game->floor_img) || !(game->player_img) ||
 		!(game->item_img) || !(game->exit_img))
 		return (-1);
-	printf("load images successful!\n");
 	return (0);
 }
 
 void	check_item(t_game *game)
 {
-	static int	i = 0;
-
-	printf("CP: check_item 00: i = %d\n", i);
 	if (game->map[game->player_y][game->player_x] == 'C')
 	{
 		game->items_collected++;
@@ -89,9 +71,8 @@ void	check_item(t_game *game)
 			exit (0);
 		}
 		else
-			printf("Collect all the items!\n");
+			ft_putstr_fd("Collect all the items!\n", 1);
 	}
-	printf("CP: check_item exit: i = %d\n", i++);
 }
 
 void	move_and_print(int x, int y, t_game *game)
@@ -132,11 +113,6 @@ int handle_keypress(int keysym, t_game *game)
 	return (0);
 }
 
-void error_msg()
-{
-	printf("Error\n");	
-}
-
 int	check_ac(int ac)
 {
 	if (ac == 2)
@@ -147,7 +123,8 @@ int	check_ac(int ac)
 int	init_mlx_win(t_game *game)
 {
 	game->mlx_ptr = mlx_init();
-	game->win_ptr = mlx_new_window(game->mlx_ptr, game->map_w * 32, game->map_h * 32, "map");
+	game->win_ptr = mlx_new_window(game->mlx_ptr, game->map_w * 32,
+		game->map_h * 32, "map");
 	return (0);
 }
 
@@ -172,7 +149,6 @@ int	terminate_all(t_game *game)
 		mlx_destroy_display(game->mlx_ptr);
 		free(game->mlx_ptr);
 	}
-	printf("terminate_all finished\n");
 	exit(1);
 }
 
@@ -180,9 +156,9 @@ void	exit_error(char *s, t_game *game)
 {
 	if (s)
 	{
-		write(2, "Error\n", 6);
-		write(2, s, ft_strlen(s));
-		write(2, "\n", 1);
+		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd(s, 2);
+		ft_putstr_fd("\n", 2);
 	}
 	if (game->map)
 		clean_map(game);
@@ -223,21 +199,14 @@ int main(int ac, char **av)
 	if (check_ac(ac) == -1)
 	exit_error("Invalid number of parameters.", &game);
 	else if(read_and_check_map(av[1], &game) == -1)
-	exit_error(NULL, &game); // TODO:
+	exit_error(NULL, &game);
 	else if (init_mlx_win(&game) == -1)
 	exit_error("Failed to initialize MLX window.", &game);
-	printf("check point 01\n");
-
 	if (load_images(&game) == -1)
 	exit_error("Failed to load images.", &game);
-	printf("Player Start: (%d, %d)\n", game.player_x, game.player_y);
-	printf("check point 03\n");
 	draw_map(&game);
-
-	printf("check point 04\n");
 	mlx_key_hook(game.win_ptr, handle_keypress, &game);
 	mlx_hook(game.win_ptr, 17, 0, terminate_all, &game);	
-	printf("check point 05\n");
 	mlx_loop(game.mlx_ptr);
 	terminate_all(&game);
 	exit(0);

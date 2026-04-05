@@ -44,7 +44,8 @@ It must follow the conditions below;
 - The map has one player, one exit, and at least one collectible.
 - There must be a path, which allows the player to collect every collectibles and leads to the exit.
 - No letters other than above elements are allowed.
-- File name consists of [a-z], [A-Z], [0-9], '_', '.'.
+- The last line of the map ends without a new line.
+- File name consists of [a-z], [A-Z], [0-9], '_', '.', and is less than 100 letters.
 
 
 ## Resources
