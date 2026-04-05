@@ -6,12 +6,12 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 21:22:29 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 21:47:54 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
+// TODO: map size limit 
 void	draw_map(t_game *game)
 {
 	int	x;

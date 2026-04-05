@@ -8,10 +8,8 @@ OBJS = source/check_element.o \
 	source/check_path.o \
 	source/check_shape.o \
 	source/error_handler.o \
-	source/floodfill.o \
 	source/game_main.o \
 	source/general_util.o \
-	source/get_num_nl.o \
 	source/key_handler.o \
 	source/read_and_check_map.o \
 	source/read_map.o \

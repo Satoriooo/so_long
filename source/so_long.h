@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 20:32:37 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 21:32:50 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 21:47:14 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,9 @@ typedef struct s_point
 }	t_point;
 
 int		read_and_check_map(char *filename, t_game *game);
-void	flood_fill(t_game *game, t_point size, t_point start);
 int		read_map(int fd, char *filename, t_game *game);
 int		handle_keypress(int keysym, t_game *game);
 int		is_valid_map(t_game *game);
-int		is_valid_map_name(char *filename);
 int		is_valid_shape(char **map, int cnt);
 int		is_valid_path(t_game *game);
 int		is_valid_element(t_game *game);
