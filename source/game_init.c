@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 17:23:16 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 17:29:36 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,15 @@ void	check_item(t_game *game)
 	printf("CP: check_item 00: i = %d\n", i);
 	if (game->map[game->player_y][game->player_x] == 'C')
 	{
-		printf("CP: check_item 01: i = %d\n", i);
-		(game->items_collected)++;
-		printf("CP: check_item 02: i = %d\n", i);
+		game->items_collected++;
 		game->map[game->player_y][game->player_x] = '0';
-		printf("Items: %d\n", game->items_collected);
 	}
 
 	if (game->map[game->player_y][game->player_x] == 'E')
 	{
 		if (game->items_collected == game->items_on_map)
 		{
-			printf("Game clear!\n");
+			ft_putstr_fd("Game clear!\n", 1);
 			terminate_all(game);
 			exit (0);
 		}
