@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/04 21:20:00 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 16:08:26 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ int	init_mlx_win(t_game *game)
 	return (0);
 }
 
-void	terminate_all(t_game *game)
+int	terminate_all(t_game *game)
 {
 	if (game->map)
 		clean_map(game);
@@ -232,7 +232,7 @@ int main(int ac, char **av)
 
 	printf("check point 04\n");
 	mlx_key_hook(game.win_ptr, handle_keypress, &game);
-
+	mlx_hook(game.win_ptr, 17, 0, terminate_all, &game);	
 	printf("check point 05\n");
 	mlx_loop(game.mlx_ptr);
 	terminate_all(&game);
