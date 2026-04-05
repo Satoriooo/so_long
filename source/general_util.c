@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 17:08:35 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 20:33:15 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 21:21:24 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,39 @@ void	ft_putnbr_fd(int nb, int fd)
 	if (nb >= 10)
 		ft_putnbr_fd(nb / 10, fd);
 	ft_putchar((nb % 10) + '0', fd);
+}
+
+void	clean_map(t_game *game)
+{
+	int	n;
+
+	n = game->map_h;
+	while (--n >= 0)
+		free(game->map[n]);
+	free(game->map);
+	game->map = NULL;
+}
+
+int	terminate_all(t_game *game, int n)
+{
+	if (game->map)
+		clean_map(game);
+	if (game->floor_img)
+		mlx_destroy_image(game->mlx_ptr, game->floor_img);
+	if (game->exit_img)
+		mlx_destroy_image(game->mlx_ptr, game->exit_img);
+	if (game->player_img)
+		mlx_destroy_image(game->mlx_ptr, game->player_img);
+	if (game->item_img)
+		mlx_destroy_image(game->mlx_ptr, game->item_img);
+	if (game->wall_img)
+		mlx_destroy_image(game->mlx_ptr, game->wall_img);
+	if (game->win_ptr)
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	if (game->mlx_ptr)
+	{
+		mlx_destroy_display(game->mlx_ptr);
+		free(game->mlx_ptr);
+	}
+	exit(n);
 }

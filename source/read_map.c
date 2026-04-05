@@ -6,22 +6,11 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:43 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 20:27:49 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 20:55:11 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	clean_map(t_game *game)
-{
-	int	n;
-
-	n = game->map_h;
-	while (--n >= 0)
-		free(game->map[n]);
-	free(game->map);
-	game->map = NULL;
-}
 
 int	is_alpha_num_underbar(char *s)
 {
@@ -59,13 +48,6 @@ int	is_correct_suffix(char *s, char *suffix)
 	if (s[i] == suffix[j])
 		return (0);
 	return (-1);
-}
-
-void	print_error(char *s)
-{
-	ft_putstr_fd("Error:\n", 2);
-	ft_putstr_fd(s, 2);
-	ft_putstr_fd("\n", 2);
 }
 
 int	is_valid_map_name(char *s)

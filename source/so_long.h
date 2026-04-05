@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 20:32:37 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 20:47:33 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 21:23:14 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,19 @@ typedef struct s_point
 int		read_and_check_map(char *filename, t_game *game);
 void	flood_fill(t_game *game, t_point size, t_point start);
 int		read_map(int fd, char *filename, t_game *game);
+int		handle_keypress(int keysym, t_game *game);
 int		is_valid_map(t_game *game);
 int		is_valid_map_name(char *filename);
+int		is_valid_shape(char **map, int cnt);
 int		is_valid_path(t_game *game);
 int		is_valid_element(t_game *game);
+void	exit_error(char *s, t_game *game);
 void	clean_map(t_game *game);
-int		terminate_all(t_game *game);
+int		terminate_all(t_game *game, int n);
 void	exit_error(char *s, t_game *game);
 void	print_error(char *s);
-void	init_struct(t_game *game);
 void	ft_putnbr_fd(int nb, int fd);
 void	ft_putstr_fd(char *s, int fd);
-void	move_and_print(int x, int y, t_game *game);
+void	draw_map(t_game *game);
 
 #endif
