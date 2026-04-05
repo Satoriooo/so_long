@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 16:08:26 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 16:33:06 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,32 +97,36 @@ void	check_item(t_game *game)
 	printf("CP: check_item exit: i = %d\n", i++);
 }
 
+void	move_and_print(int x, int y, t_game *game)
+{
+	game->player_x += x;
+	game->player_y += y;
+	printf("Move: %d\n", ++game->move);
+}
+
 int handle_keypress(int keysym, t_game *game)
 {
 	if (keysym == 0xff1b) // ESC
-	{
 		terminate_all(game);
-		exit (0);
-	}
 	if (keysym == 0xff51 || keysym == 0x0041) // Left
 	{
 		if (game->map[game->player_y][game->player_x - 1] != '1')
-			game->player_x -= 1;
+			move_and_print(-1, 0, game);
 	}
 	else if (keysym == 0xff52 || keysym == 0x0057) // Up
 	{
 		if (game->map[game->player_y - 1][game->player_x] != '1')
-			game->player_y -= 1;
+			move_and_print(0, -1, game);
 	}
 	if (keysym == 0xff53 || keysym == 0x0044) // Right
 	{
 		if (game->map[game->player_y][game->player_x + 1] != '1')
-			game->player_x += 1;
+			move_and_print(1, 0, game);
 	}
 	if (keysym == 0xff54 || keysym == 0x0053) // Down
 	{
 		if (game->map[game->player_y + 1][game->player_x] != '1')
-			game->player_y += 1;
+			move_and_print(0, 1, game);
 	}
 	check_item(game);
 	draw_map(game);
@@ -209,6 +213,7 @@ void	init_struct(t_game *game)
 	game->player_on_map = 0;
 	game->player_x = 0;
 	game->player_y = 0;
+	game->move = 0;
 }
 
 int main(int ac, char **av)
