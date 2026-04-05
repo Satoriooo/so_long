@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 18:47:21 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 20:22:42 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,18 @@ void	draw_map(t_game *game)
 
 int	load_images(t_game *game)
 {
-	game->wall_img = mlx_xpm_file_to_image(game->mlx_ptr, "./image/wall.xpm", &game->img_w, &game->img_h);
-	game->floor_img = mlx_xpm_file_to_image(game->mlx_ptr, "./image/floor.xpm", &game->img_w, &game->img_h);
-	game->player_img = mlx_xpm_file_to_image(game->mlx_ptr, "./image/player.xpm", &game->img_w, &game->img_h);
-	game->item_img = mlx_xpm_file_to_image(game->mlx_ptr, "./image/coin.xpm", &game->img_w, &game->img_h);
-	game->exit_img = mlx_xpm_file_to_image(game->mlx_ptr, "./image/exit.xpm", &game->img_w, &game->img_h);
-	if (!(game->wall_img) || !(game->floor_img) || !(game->player_img) ||
-		!(game->item_img) || !(game->exit_img))
+	game->wall_img = mlx_xpm_file_to_image
+		(game->mlx_ptr, "./image/wall.xpm", &game->img_w, &game->img_h);
+	game->floor_img = mlx_xpm_file_to_image
+		(game->mlx_ptr, "./image/floor.xpm", &game->img_w, &game->img_h);
+	game->player_img = mlx_xpm_file_to_image
+		(game->mlx_ptr, "./image/player.xpm", &game->img_w, &game->img_h);
+	game->item_img = mlx_xpm_file_to_image
+		(game->mlx_ptr, "./image/coin.xpm", &game->img_w, &game->img_h);
+	game->exit_img = mlx_xpm_file_to_image
+		(game->mlx_ptr, "./image/exit.xpm", &game->img_w, &game->img_h);
+	if (!(game->wall_img) || !(game->floor_img) || !(game->player_img)
+		|| !(game->item_img) || !(game->exit_img))
 		return (-1);
 	return (0);
 }
@@ -61,7 +66,6 @@ void	check_item(t_game *game)
 		game->items_collected++;
 		game->map[game->player_y][game->player_x] = '0';
 	}
-
 	if (game->map[game->player_y][game->player_x] == 'E')
 	{
 		if (game->items_collected == game->items_on_map)
@@ -86,24 +90,24 @@ void	move_and_print(int x, int y, t_game *game)
 
 int handle_keypress(int keysym, t_game *game)
 {
-	if (keysym == 0xff1b) // ESC
+	if (keysym == 0xff1b)
 		terminate_all(game);
-	if (keysym == 0xff51 || keysym == 0x0041) // Left
+	if (keysym == 0xff51 || keysym == 0x0061) // Left
 	{
 		if (game->map[game->player_y][game->player_x - 1] != '1')
 			move_and_print(-1, 0, game);
 	}
-	else if (keysym == 0xff52 || keysym == 0x0057) // Up
+	else if (keysym == 0xff52 || keysym == 0x0077) // Up
 	{
 		if (game->map[game->player_y - 1][game->player_x] != '1')
 			move_and_print(0, -1, game);
 	}
-	if (keysym == 0xff53 || keysym == 0x0044) // Right
+	if (keysym == 0xff53 || keysym == 0x0064) // Right
 	{
 		if (game->map[game->player_y][game->player_x + 1] != '1')
 			move_and_print(1, 0, game);
 	}
-	if (keysym == 0xff54 || keysym == 0x0053) // Down
+	if (keysym == 0xff54 || keysym == 0x0073) // Down
 	{
 		if (game->map[game->player_y + 1][game->player_x] != '1')
 			move_and_print(0, 1, game);

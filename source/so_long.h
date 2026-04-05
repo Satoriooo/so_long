@@ -57,7 +57,6 @@ int		is_valid_path(t_game *game);
 int		is_valid_element(t_game *game);
 void	clean_map(t_game *game);
 int		terminate_all(t_game *game);
-void	print_map(t_game *game); // TODO: delete later!
 void	exit_error(char *s, t_game *game);
 void	print_error(char *s);
 void	init_struct(t_game *game);

@@ -53,6 +53,8 @@ It must follow the conditions below;
 #### MiniLibX
 - [42 Docs - MiniLibX](https://harm-smits.github.io/42docs/libs/minilibx)
 - [MiniLibX - Simple Graphical Interface Library for students](https://qst0.github.io/ft_libgfx/man_mlx.html)
+#### Keysym
+- [keysymdef.h source code](https://codebrowser.dev/gtk/include/X11/keysymdef.h.html)
 
 ### AI usage
 - Basic usage of MiniLibX

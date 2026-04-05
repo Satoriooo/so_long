@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 21:23:16 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 18:44:06 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 20:16:07 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	open_file(char *filename)
 
 int	read_and_check_map(char *filename, t_game *game)
 {
+	printf("read_and_check_map: check point 00\n"); 
+	
 	int	fd;
 	if (is_valid_map_name(filename) == -1)
 		return (-1);
