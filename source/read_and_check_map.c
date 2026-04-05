@@ -6,19 +6,29 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 21:23:16 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/04 21:32:50 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 11:09:51 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+int	open_file(char *filename)
+{
+	int	fd;
+
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		print_error("File does not exist, or no read permission.");
+	return (fd);
+}
+
 int	read_and_check_map(char *filename, t_game *game)
 {
 	int	fd;
-	
+	printf("read_and_check_map ...check00\n");
 	if (is_valid_map_name(filename) == -1)
-		return (-1);
-	fd = open(filename, O_RDONLY);
+		return (printf("read_and_check_map ...check01\n"),-1);
+	fd = open_file(filename);
 	if (fd == -1)
 		return (-1);
 	if (read_map(fd, filename, game) == -1)
@@ -30,7 +40,7 @@ int	read_and_check_map(char *filename, t_game *game)
 	}
 	clean_map(game);
 	close(fd);
-	fd = open(filename, O_RDONLY);
+	fd = open_file(filename);
 	if (fd == -1)
 		return (-1);
 	read_map(fd, filename, game);

@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:43 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/04 21:29:20 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 13:16:42 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,15 @@ int	is_valid_map_name(char *s)
 
 int count_line(char *filename)
 {
-	char *line;
-	int n;
-	int	fd;
+	char	*line;
+	int 	n;
+	int		fd;
 
 	fd = open(filename, O_RDONLY);
 	n = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
+		printf("line: %s\n", line);
 		n++;
 		free(line);
 	}
@@ -112,6 +113,7 @@ int	read_map(int fd, char *filename, t_game *game)
 {
 	int		n;
 	int 	i;
+	char 	*temp;
 	
 	n = count_line(filename);
 	printf("Result count line: n = %d\n", n);
@@ -122,14 +124,13 @@ int	read_map(int fd, char *filename, t_game *game)
 		return (-1);
 	}
 	i = 0;
-
 	while (i < n)
 	{
 		game->map[i] = get_next_line(fd);
-		if (game->map[i] == NULL)
-			free(game->map[i]); // TODO: MAKE CLEARNER and free all before alocated stuff if smth failed
 		i++;
 	}
+	temp = get_next_line(fd);
+	free(temp);
 	game->map[n] = NULL;
 	game->map_h = n;
 	printf("game->map_h: %d\n", game->map_h);
