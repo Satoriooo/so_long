@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 20:22:42 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 20:44:55 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,26 +88,26 @@ void	move_and_print(int x, int y, t_game *game)
 	ft_putstr_fd("\n", 1);
 }
 
-int handle_keypress(int keysym, t_game *game)
+int	handle_keypress(int keysym, t_game *game)
 {
 	if (keysym == 0xff1b)
 		terminate_all(game);
-	if (keysym == 0xff51 || keysym == 0x0061) // Left
+	if (keysym == 0xff51 || keysym == 0x0061)
 	{
 		if (game->map[game->player_y][game->player_x - 1] != '1')
 			move_and_print(-1, 0, game);
 	}
-	else if (keysym == 0xff52 || keysym == 0x0077) // Up
+	else if (keysym == 0xff52 || keysym == 0x0077)
 	{
 		if (game->map[game->player_y - 1][game->player_x] != '1')
 			move_and_print(0, -1, game);
 	}
-	if (keysym == 0xff53 || keysym == 0x0064) // Right
+	if (keysym == 0xff53 || keysym == 0x0064)
 	{
 		if (game->map[game->player_y][game->player_x + 1] != '1')
 			move_and_print(1, 0, game);
 	}
-	if (keysym == 0xff54 || keysym == 0x0073) // Down
+	if (keysym == 0xff54 || keysym == 0x0073)
 	{
 		if (game->map[game->player_y + 1][game->player_x] != '1')
 			move_and_print(0, 1, game);
@@ -127,8 +127,8 @@ int	check_ac(int ac)
 int	init_mlx_win(t_game *game)
 {
 	game->mlx_ptr = mlx_init();
-	game->win_ptr = mlx_new_window(game->mlx_ptr, game->map_w * 32,
-		game->map_h * 32, "map");
+	game->win_ptr = mlx_new_window
+		(game->mlx_ptr, game->map_w * 32, game->map_h * 32, "map");
 	return (0);
 }
 
@@ -195,24 +195,24 @@ void	init_struct(t_game *game)
 	game->move = 0;
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_game	game;
 
 	init_struct(&game);
 	if (check_ac(ac) == -1)
-	exit_error("Invalid number of parameters.", &game);
-	else if(read_and_check_map(av[1], &game) == -1)
-	exit_error(NULL, &game);
+		exit_error("Invalid number of parameters.", &game);
+	else if (read_and_check_map(av[1], &game) == -1)
+		exit_error(NULL, &game);
 	else if (init_mlx_win(&game) == -1)
-	exit_error("Failed to initialize MLX window.", &game);
+		exit_error("Failed to initialize MLX window.", &game);
 	if (load_images(&game) == -1)
-	exit_error("Failed to load images.", &game);
+		exit_error("Failed to load images.", &game);
 	draw_map(&game);
 	mlx_key_hook(game.win_ptr, handle_keypress, &game);
-	mlx_hook(game.win_ptr, 17, 0, terminate_all, &game);	
+	mlx_hook(game.win_ptr, 17, 0, terminate_all, &game);
 	mlx_loop(game.mlx_ptr);
 	terminate_all(&game);
 	exit(0);
 	return (0);
-};
+}

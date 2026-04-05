@@ -1,13 +1,25 @@
-#ifndef	SO_LONG_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/05 20:32:37 by shirose           #+#    #+#             */
+/*   Updated: 2026/04/05 20:47:33 by shirose          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include <mlx.h>
-#include <limits.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h> // forbidden!
-#include <fcntl.h>
-#include "get_next_line.h"
+# include <mlx.h>
+# include <limits.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h> // forbidden!
+# include <fcntl.h>
+# include "get_next_line.h"
 
 typedef struct s_game
 {
@@ -43,9 +55,10 @@ typedef struct s_elm
 	int	z;
 }	t_elm;
 
-typedef struct s_point {
+typedef struct s_point
+{
 	int	x;
-	int y;
+	int	y;
 }	t_point;
 
 int		read_and_check_map(char *filename, t_game *game);

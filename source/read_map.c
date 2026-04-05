@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:43 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 20:20:49 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 20:27:49 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,6 @@ int	count_line(char *filename)
 	char	*line;
 	int		n;
 	int		fd;
-
-	static int i = 0; //TODO
-	printf("count_line called ... i: %d\n", i);
 
 	fd = open(filename, O_RDONLY);
 	n = 0;
