@@ -31,6 +31,7 @@ typedef struct s_game
 	int		items_on_map;
 	int		items_on_path;
 	int		items_collected;
+	int		move;
 }	t_game;
 
 typedef struct s_elm
@@ -60,5 +61,7 @@ void	print_map(t_game *game); // TODO: delete later!
 void	exit_error(char *s, t_game *game);
 void	print_error(char *s);
 void	init_struct(t_game *game);
+void	ft_putnbr_fd(int nb, int fd);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif
