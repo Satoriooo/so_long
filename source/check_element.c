@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:59:48 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 18:59:27 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 21:31:54 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static int	ft_is_in(char *s, char c)
 			return (0);
 		i++;
 	}
-	printf("invalid letter: %c / ascii %d\n", c, c);
 	return (-1);
 }
 

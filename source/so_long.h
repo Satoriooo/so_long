@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 20:32:37 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 21:23:14 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 21:32:50 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 # define SO_LONG_H
 
 # include <mlx.h>
-# include <limits.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h> // forbidden!
 # include <fcntl.h>
 # include "get_next_line.h"
 
