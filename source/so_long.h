@@ -63,5 +63,6 @@ void	print_error(char *s);
 void	init_struct(t_game *game);
 void	ft_putnbr_fd(int nb, int fd);
 void	ft_putstr_fd(char *s, int fd);
+void	move_and_print(int x, int y, t_game *game);
 
 #endif

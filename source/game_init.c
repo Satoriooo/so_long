@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 16:33:06 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/05 17:23:16 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,9 @@ void	move_and_print(int x, int y, t_game *game)
 {
 	game->player_x += x;
 	game->player_y += y;
-	printf("Move: %d\n", ++game->move);
+	ft_putstr_fd("Move count: ", 1);
+	ft_putnbr_fd(++game->move, 1);
+	ft_putstr_fd("\n", 1);
 }
 
 int handle_keypress(int keysym, t_game *game)
