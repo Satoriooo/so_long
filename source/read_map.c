@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:43 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 21:40:41 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/06 17:43:09 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ static int	count_line(char *filename)
 		n++;
 		free(line);
 		line = get_next_line(fd);
+	}
+	if (errno > 0)
+	{
+		print_error("Error test: ERRNO");
+		exit(1);
 	}
 	close(fd);
 	return (n);
@@ -48,6 +53,8 @@ int	read_map(int fd, char *filename, t_game *game)
 	while (i < n)
 	{
 		game->map[i] = get_next_line(fd);
+		if (errno > 0)
+			exit_error("Failed get_next_line.", game);
 		i++;
 	}
 	temp = get_next_line(fd);

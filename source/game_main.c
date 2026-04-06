@@ -6,12 +6,12 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 21:47:54 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/06 17:10:17 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-// TODO: map size limit 
+
 void	draw_map(t_game *game)
 {
 	int	x;
@@ -62,8 +62,14 @@ static int	load_images(t_game *game)
 static int	init_mlx_win(t_game *game)
 {
 	game->mlx_ptr = mlx_init();
+	if (!game->mlx_ptr)
+		exit_error("Failed mlx initialization.", game);
 	game->win_ptr = mlx_new_window
 		(game->mlx_ptr, game->map_w * 32, game->map_h * 32, "map");
+	if (!game->win_ptr)
+	{
+		exit_error("Failed window initialization.", game);
+	}
 	return (0);
 }
 

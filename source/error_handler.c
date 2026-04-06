@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 20:57:30 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 21:11:18 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/06 16:33:08 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_error(char *s)
 {
 	if (s)
 	{
-		ft_putstr_fd("Error:\n", 2);
+		ft_putstr_fd("Error\n", 2);
 		ft_putstr_fd(s, 2);
 		ft_putstr_fd("\n", 2);
 	}
