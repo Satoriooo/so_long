@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:59:48 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 21:31:54 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/07 15:35:42 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static int	is_correct_element(t_game *game)
 	return (-1);
 }
 
-static void	set_player_pos(t_game *game, int x, int y)
+static void	set_player_pos(t_game *game, int i, int j)
 {
-	game->player_x = x;
-	game->player_y = y;
+	game->player_x = j;
+	game->player_y = i;
 	game->player_on_map++;
 }
 

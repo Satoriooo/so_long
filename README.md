@@ -15,7 +15,7 @@ Through this project students are expected to deepen understanding in the follow
 - Safe and clean termination on error or after clear
 
 ## Instructions
-### Installations
+### Installation
 For installation, clone the git repo to your work directory.
 ```bash
 git clone https://github.com/Satoriooo/so_long.git
@@ -32,9 +32,7 @@ Example:
 ```bash
 ./so_long "map_sample.ber"
 ```
-
 To move the character, use either arrow keys or WASD keys.
-
 
 The map has the 5 elements;
 >0: Path, 1: Wall, E: Exit, C: Collectible, P: Player
@@ -48,7 +46,6 @@ It must follow the conditions below;
 - The maximum size is 1980 x 1080 pixel, which is 61 x 33 tiles.
 - File name consists of [a-z], [A-Z], [0-9], '_', '.', and is less than 100 letters.
 
-
 ## Resources
 ### Documentations
 #### MiniLibX
@@ -56,6 +53,8 @@ It must follow the conditions below;
 - [MiniLibX - Simple Graphical Interface Library for students](https://qst0.github.io/ft_libgfx/man_mlx.html)
 #### Keysym
 - [keysymdef.h source code](https://codebrowser.dev/gtk/include/X11/keysymdef.h.html)
+#### Errno
+- [【C言語】errnoを利用してエラーの原因を特定する](https://daeudaeu.com/c-errno/) (ENG: Find an error with errno in C)
 
 ### AI usage
 - Basic usage of MiniLibX
