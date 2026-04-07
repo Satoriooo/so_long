@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/06 17:10:17 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/07 17:03:21 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ static void	init_struct(t_game *game)
 	game->player_x = 0;
 	game->player_y = 0;
 	game->move = 0;
+	game->error_i = -1;
 }
 
 int	main(int ac, char **av)

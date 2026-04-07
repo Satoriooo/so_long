@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 17:08:35 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 21:21:24 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/07 17:33:09 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ void	clean_map(t_game *game)
 	int	n;
 
 	n = game->map_h;
-	while (--n >= 0)
-		free(game->map[n]);
+	if (game->error_i > -1)
+		n = game->error_i;
+	while (n >= 0)
+		free(game->map[n--]);
 	free(game->map);
 	game->map = NULL;
 }
