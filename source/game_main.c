@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/09 17:13:09 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/09 19:52:23 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ void	draw_map(t_game *game)
 static int	load_images(t_game *game)
 {
 	game->wall_img = mlx_xpm_file_to_image
-		(game->mlx_ptr, "./image/wall.xpm", &game->img_w, &game->img_h);
+		(game->mlx_ptr, "./textures/wall.xpm", &game->img_w, &game->img_h);
 	game->floor_img = mlx_xpm_file_to_image
-		(game->mlx_ptr, "./image/floor.xpm", &game->img_w, &game->img_h);
+		(game->mlx_ptr, "./textures/floor.xpm", &game->img_w, &game->img_h);
 	game->player_img = mlx_xpm_file_to_image
-		(game->mlx_ptr, "./image/player.xpm", &game->img_w, &game->img_h);
+		(game->mlx_ptr, "./textures/player.xpm", &game->img_w, &game->img_h);
 	game->item_img = mlx_xpm_file_to_image
-		(game->mlx_ptr, "./image/coin.xpm", &game->img_w, &game->img_h);
+		(game->mlx_ptr, "./textures/coin.xpm", &game->img_w, &game->img_h);
 	game->exit_img = mlx_xpm_file_to_image
-		(game->mlx_ptr, "./image/exit.xpm", &game->img_w, &game->img_h);
+		(game->mlx_ptr, "./textures/exit.xpm", &game->img_w, &game->img_h);
 	if (!(game->wall_img) || !(game->floor_img) || !(game->player_img)
 		|| !(game->item_img) || !(game->exit_img))
 		return (-1);
