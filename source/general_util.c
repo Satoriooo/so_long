@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 17:08:35 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/07 17:33:09 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/09 17:32:52 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	clean_map(t_game *game)
 
 int	terminate_all(t_game *game, int n)
 {
+	if (game->fd > 0)
+		close(game->fd);
 	if (game->map)
 		clean_map(game);
 	if (game->floor_img)

@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 21:23:16 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 21:41:12 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/09 17:36:20 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,22 +77,25 @@ static int	open_file(char *filename)
 
 int	read_and_check_map(char *filename, t_game *game)
 {
-	int	fd;
 
 	if (is_valid_map_name(filename) == -1)
 		return (-1);
-	fd = open_file(filename);
-	if (fd == -1)
+	game->fd = open_file(filename);
+	if (game->fd == -1)
 		return (-1);
-	if (read_map(fd, filename, game) == -1)
+	if (read_map(game->fd, filename, game) == -1)
 		return (-1);
 	if (is_valid_map(game) == -1)
+	{
+		close(game->fd);
+		game->fd = -1;
 		return (-1);
+	}
 	clean_map(game);
-	close(fd);
-	fd = open_file(filename);
-	if (fd == -1)
+	close(game->fd);
+	game->fd = open_file(filename);
+	if (game->fd == -1)
 		return (-1);
-	read_map(fd, filename, game);
+	read_map(game->fd, filename, game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:43 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/07 17:34:02 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/09 17:30:37 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	count_line(char *filename)
 	if (errno > 0)
 	{
 		print_error("Count line with gnl failed.");
+		close(fd);
 		exit(1);
 	}
 	close(fd);
@@ -55,15 +56,12 @@ int	read_map(int fd, char *filename, t_game *game)
 	n = count_line(filename);
 	game->map = (char **)malloc((sizeof(char *)) * (n + 1));
 	if (game->map == NULL)
-	{
-		print_error("malloc for map read failed.");
-		return (-1);
-	}
+		exit_error("malloc for map read failed.", game);
 	i = 0;
 	while (i < n)
 	{
 		game->map[i] = get_next_line(fd);
-		if (errno > 0)
+		if (game->map == NULL && errno > 0)
 		{
 			game->error_i = i;
 			exit_error("Failed get_next_line.", game);

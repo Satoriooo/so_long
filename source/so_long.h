@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 20:32:37 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/07 17:32:06 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/09 17:12:45 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_game
 	int		items_collected;
 	int		move;
 	int		error_i;
+	int		fd;
 }	t_game;
 
 typedef struct s_point
