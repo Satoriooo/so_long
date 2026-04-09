@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:43 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/09 17:30:37 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/09 17:52:02 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	read_map(int fd, char *filename, t_game *game)
 	while (i < n)
 	{
 		game->map[i] = get_next_line(fd);
-		if (game->map == NULL && errno > 0)
+		if (errno > 0)
 		{
 			game->error_i = i;
 			exit_error("Failed get_next_line.", game);
