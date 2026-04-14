@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 20:33:49 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/06 13:30:16 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/14 17:18:27 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	*append_buffer(int fd, char *bookmark)
 
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
-		return (NULL);
+		return (free(bookmark), NULL);
 	n = 1;
 	while (locate_nl(bookmark) == -1 && n != 0)
 	{
@@ -106,6 +106,8 @@ char	*get_next_line(int fd)
 	if (idx >= 0)
 	{
 		line = get_line(bookmark, idx);
+		if (line == NULL || ft_strlen(line) == 0)
+			return(free(bookmark), NULL);
 		tmp = bookmark;
 		bookmark = get_new_bookmark(bookmark, idx);
 		return (free(tmp), line);
@@ -115,3 +117,21 @@ char	*get_next_line(int fd)
 	line = bookmark;
 	return (bookmark = NULL, line);
 }
+
+// #include <fcntl.h>
+// #include <stdio.h>
+// #include "get_next_line.h"
+
+// int	main(void)
+// {
+// 	int		fd = open("sample.txt", O_RDONLY);
+// 	char	*line;
+
+// 	while ((line = get_next_line(fd)) != NULL)
+// 	{
+// 		printf("%s", line);
+// 		free(line);
+// 	}
+// 	close(fd);
+// 	return (0);
+// }

@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/09 19:52:23 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/14 18:03:07 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,31 @@ void	draw_map(t_game *game)
 
 static int	load_images(t_game *game)
 {
-	game->wall_img = mlx_xpm_file_to_image
-		(game->mlx_ptr, "./textures/wall.xpm", &game->img_w, &game->img_h);
+	game->wall_img = NULL;
+	// game->wall_img = mlx_xpm_file_to_image
+	// 	(game->mlx_ptr, "./textures/wall.xpm", &game->img_w, &game->img_h);
+	if (!game->wall_img)
+		return (-1);
 	game->floor_img = mlx_xpm_file_to_image
 		(game->mlx_ptr, "./textures/floor.xpm", &game->img_w, &game->img_h);
+	if (!game->floor_img)
+		return (-1);
 	game->player_img = mlx_xpm_file_to_image
 		(game->mlx_ptr, "./textures/player.xpm", &game->img_w, &game->img_h);
+	if (!game->player_img)
+		return (-1);
 	game->item_img = mlx_xpm_file_to_image
 		(game->mlx_ptr, "./textures/coin.xpm", &game->img_w, &game->img_h);
+	if (!game->item_img)
+		return (-1);
 	game->exit_img = mlx_xpm_file_to_image
 		(game->mlx_ptr, "./textures/exit.xpm", &game->img_w, &game->img_h);
-	if (!(game->wall_img) || !(game->floor_img) || !(game->player_img)
-		|| !(game->item_img) || !(game->exit_img))
+	if (!game->exit_img)
 		return (-1);
 	return (0);
 }
 
-static int	init_mlx_win(t_game *game)
+static void	init_mlx_win(t_game *game)
 {
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
@@ -67,10 +75,7 @@ static int	init_mlx_win(t_game *game)
 	game->win_ptr = mlx_new_window
 		(game->mlx_ptr, game->map_w * 32, game->map_h * 32, "map");
 	if (!game->win_ptr)
-	{
 		exit_error("Failed window initialization.", game);
-	}
-	return (0);
 }
 
 static void	init_struct(t_game *game)
@@ -109,8 +114,7 @@ int	main(int ac, char **av)
 		exit_error("Invalid number of parameters.", &game);
 	else if (read_and_check_map(av[1], &game) == -1)
 		exit_error(NULL, &game);
-	else if (init_mlx_win(&game) == -1)
-		exit_error("Failed to initialize MLX window.", &game);
+	init_mlx_win(&game);
 	if (load_images(&game) == -1)
 		exit_error("Failed to load images.", &game);
 	draw_map(&game);

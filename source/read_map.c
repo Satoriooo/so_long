@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:01:43 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/09 17:52:02 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/14 17:39:49 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@ static int	count_line(char *filename)
 	int		fd;
 
 	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		print_error("Open failed.");
+		exit(1);
+	}
 	n = 0;
+	errno = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -39,10 +45,10 @@ static int	count_line(char *filename)
 
 static void	hope_nb_see_this_ugly_func(int fd, t_game *game, int n)
 {
-	char	*temp;
-
-	temp = get_next_line(fd);
-	free(temp);
+// 	char	*temp;
+fd++;
+// //	temp = get_next_line(fd);
+	
 	game->map[n] = NULL;
 	game->map_h = n;
 	game->map_w = ft_strlen(game->map[0]) - 1;
@@ -60,6 +66,7 @@ int	read_map(int fd, char *filename, t_game *game)
 	i = 0;
 	while (i < n)
 	{
+		errno = 0;
 		game->map[i] = get_next_line(fd);
 		if (errno > 0)
 		{
