@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/14 18:03:07 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/14 19:42:20 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,8 @@ void	draw_map(t_game *game)
 
 static int	load_images(t_game *game)
 {
-	game->wall_img = NULL;
-	// game->wall_img = mlx_xpm_file_to_image
-	// 	(game->mlx_ptr, "./textures/wall.xpm", &game->img_w, &game->img_h);
+	game->wall_img = game->wall_img = mlx_xpm_file_to_image
+		(game->mlx_ptr, "./textures/wall.xpm", &game->img_w, &game->img_h);
 	if (!game->wall_img)
 		return (-1);
 	game->floor_img = mlx_xpm_file_to_image
