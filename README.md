@@ -43,7 +43,7 @@ It must follow the conditions below;
 - There must be a path, which allows the player to collect every collectibles and leads to the exit.
 - No letters other than above elements are allowed.
 - The last line of the map ends without a new line.
-- The maximum size is 1980 x 1080 pixel, which is 61 x 33 tiles.
+- The maximum size is 123 x 33 tiles, which is the size of dual FHD displays put side by side.
 - File name consists of [a-z], [A-Z], [0-9], '_', '.', and is less than 100 letters.
 
 ## Resources

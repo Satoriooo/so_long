@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:00:08 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/07 17:06:43 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/15 18:38:52 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	is_valid_size(t_game *game)
 {
-	if (game->map_w > 1980 / 32 - 1 || game->map_h > 1080 / 32 - 1)
+	if (game->map_w > 123 - 1 || game->map_h > 33)
 		return (-1);
 	return (0);
 }
@@ -34,7 +34,7 @@ static int	is_ending_without_nl(t_game *game)
 int	is_valid_map(t_game *game)
 {
 	if (is_valid_size(game) == -1)
-		exit_error("Map size is too large. (row < 33, column < 62)", game);
+		exit_error("Map size is too large. (row < 34, column < 124)", game);
 	if (is_ending_without_nl(game) == -1)
 	{
 		print_error("Map must end without a new line.");
