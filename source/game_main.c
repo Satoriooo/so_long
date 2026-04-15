@@ -6,13 +6,13 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/14 19:42:20 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/15 18:04:14 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	draw_map(t_game *game)
+int	draw_map(t_game *game)
 {
 	int	x;
 	int	y;
@@ -23,9 +23,10 @@ void	draw_map(t_game *game)
 		x = -1;
 		while (++x < game->map_w)
 		{
-			mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-				game->floor_img, x * 32, y * 32);
-			if (game->map[y][x] == '1')
+			if (game->map[y][x] == '0')
+				mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+					game->floor_img, x * 32, y * 32);
+			else if (game->map[y][x] == '1')
 				mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
 					game->wall_img, x * 32, y * 32);
 			else if (game->map[y][x] == 'E')
@@ -39,6 +40,7 @@ void	draw_map(t_game *game)
 					game->player_img, x * 32, y * 32);
 		}
 	}
+	return (0);
 }
 
 static int	load_images(t_game *game)
@@ -117,8 +119,10 @@ int	main(int ac, char **av)
 	if (load_images(&game) == -1)
 		exit_error("Failed to load images.", &game);
 	draw_map(&game);
-	mlx_key_hook(game.win_ptr, handle_keypress, &game);
+//	mlx_key_hook(game.win_ptr, handle_keypress, &game);
 	mlx_hook(game.win_ptr, 17, 0, terminate_all, &game);
+	mlx_hook(game.win_ptr, 2, 1L << 0, handle_keypress, &game);	
+	mlx_loop_hook(game.mlx_ptr, &draw_map, &game);
 	mlx_loop(game.mlx_ptr);
 	terminate_all(&game, 0);
 	return (0);

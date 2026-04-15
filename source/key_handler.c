@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 21:16:45 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/05 21:20:17 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/15 18:12:46 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 static void	check_item(t_game *game)
 {
+	// if (game->move != 0)
+	// 	game->map[game->player_y][game->player_x] = '0';
+
 	if (game->map[game->player_y][game->player_x] == 'C')
 	{
 		game->items_collected++;
@@ -34,6 +37,8 @@ static void	check_item(t_game *game)
 
 static void	move_and_print(int x, int y, t_game *game)
 {
+	if (game->map[game->player_y][game->player_x] == 'P')
+		game->map[game->player_y][game->player_x] = '0';
 	game->player_x += x;
 	game->player_y += y;
 	ft_putstr_fd("Move count: ", 1);
@@ -66,6 +71,6 @@ int	handle_keypress(int keysym, t_game *game)
 			move_and_print(0, 1, game);
 	}
 	check_item(game);
-	draw_map(game);
+	// draw_map(game);
 	return (0);
 }
