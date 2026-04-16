@@ -16,8 +16,8 @@ OBJS = source/check_element.o \
 	source/read_map.o \
 	source/gnl/get_next_line.o \
 	source/gnl/get_next_line_utils.o
-	
-HEAD = so_long.h
+
+HEAD = source/so_long.h
 GNL_HEAD = source/gnl/get_next_line.h
 
 all : $(NAME)
