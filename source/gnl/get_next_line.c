@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 20:33:49 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/14 17:18:27 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/16 20:58:07 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char	*get_next_line(int fd)
 	{
 		line = get_line(bookmark, idx);
 		if (line == NULL || ft_strlen(line) == 0)
-			return(free(bookmark), NULL);
+			return (free(bookmark), NULL);
 		tmp = bookmark;
 		bookmark = get_new_bookmark(bookmark, idx);
 		return (free(tmp), line);

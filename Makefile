@@ -1,12 +1,13 @@
 NAME = so_long
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -Isource/gnl
+CFLAGS = -Wall -Wextra -Werror -Isource/gnl
 RM = rm -f
 
 OBJS = source/check_element.o \
 	source/check_map.o \
 	source/check_path.o \
 	source/check_shape.o \
+	source/draw_map.o \
 	source/error_handler.o \
 	source/game_main.o \
 	source/general_util.o \

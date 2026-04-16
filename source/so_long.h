@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 20:32:37 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/15 17:13:05 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/16 20:56:04 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ int		terminate_all(t_game *game, int n);
 void	print_error(char *s);
 void	ft_putnbr_fd(int nb, int fd);
 void	ft_putstr_fd(char *s, int fd);
-int	draw_map(t_game *game);
+void	draw_map(t_game *game, int x, int y);
 
 #endif

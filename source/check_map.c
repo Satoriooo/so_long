@@ -6,7 +6,7 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 19:00:08 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/15 18:38:52 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/16 20:57:42 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ static int	is_ending_without_nl(t_game *game)
 	return (0);
 }
 
+void	gnl_last_call(t_game *game)
+{
+	char	*tmp;
+
+	tmp = get_next_line(game->fd);
+}
+
 int	is_valid_map(t_game *game)
 {
 	if (is_valid_size(game) == -1)
@@ -38,6 +45,7 @@ int	is_valid_map(t_game *game)
 	if (is_ending_without_nl(game) == -1)
 	{
 		print_error("Map must end without a new line.");
+		gnl_last_call(game);
 		return (-1);
 	}
 	if (is_valid_shape(game->map, game->map_h) == -1)

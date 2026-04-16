@@ -6,46 +6,21 @@
 /*   By: shirose <shirose@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/28 18:48:01 by shirose           #+#    #+#             */
-/*   Updated: 2026/04/15 18:04:14 by shirose          ###   ########.fr       */
+/*   Updated: 2026/04/16 20:51:07 by shirose          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	draw_map(t_game *game)
+static int	draw_map_caller(t_game *game)
 {
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y < game->map_h)
-	{
-		x = -1;
-		while (++x < game->map_w)
-		{
-			if (game->map[y][x] == '0')
-				mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-					game->floor_img, x * 32, y * 32);
-			else if (game->map[y][x] == '1')
-				mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-					game->wall_img, x * 32, y * 32);
-			else if (game->map[y][x] == 'E')
-				mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-					game->exit_img, x * 32, y * 32);
-			else if (game->map[y][x] == 'C')
-				mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-					game->item_img, x * 32, y * 32);
-			if (game->player_x == x && game->player_y == y)
-				mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-					game->player_img, x * 32, y * 32);
-		}
-	}
+	draw_map(game, 0, 0);
 	return (0);
 }
 
 static int	load_images(t_game *game)
 {
-	game->wall_img = game->wall_img = mlx_xpm_file_to_image
+	game->wall_img = mlx_xpm_file_to_image
 		(game->mlx_ptr, "./textures/wall.xpm", &game->img_w, &game->img_h);
 	if (!game->wall_img)
 		return (-1);
@@ -118,11 +93,10 @@ int	main(int ac, char **av)
 	init_mlx_win(&game);
 	if (load_images(&game) == -1)
 		exit_error("Failed to load images.", &game);
-	draw_map(&game);
-//	mlx_key_hook(game.win_ptr, handle_keypress, &game);
+	draw_map_caller(&game);
 	mlx_hook(game.win_ptr, 17, 0, terminate_all, &game);
-	mlx_hook(game.win_ptr, 2, 1L << 0, handle_keypress, &game);	
-	mlx_loop_hook(game.mlx_ptr, &draw_map, &game);
+	mlx_hook(game.win_ptr, 2, 1L << 0, handle_keypress, &game);
+	mlx_loop_hook(game.mlx_ptr, &draw_map_caller, &game);
 	mlx_loop(game.mlx_ptr);
 	terminate_all(&game, 0);
 	return (0);
